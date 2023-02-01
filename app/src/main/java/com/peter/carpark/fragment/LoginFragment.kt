@@ -41,7 +41,7 @@ class LoginFragment : Fragment() {
             Toast.makeText(context,error,Toast.LENGTH_LONG).show()
         }
         viewModel.mLoginLiveData.observe(viewLifecycleOwner) { user ->
-            user.let {user->
+            user?.let {user->
                 SharedPreferencesTools.setUserEmail(requireContext(),user.name)
                 SharedPreferencesTools.setUserObjectId(requireContext(),user.objectId)
                 SharedPreferencesTools.setUserObjectId(requireContext(),user.sessionToken)
