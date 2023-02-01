@@ -42,14 +42,10 @@ class LoginFragment : Fragment() {
         }
         viewModel.mLoginLiveData.observe(viewLifecycleOwner) { user ->
             user.let {user->
-                Log.e("peter", "login${user.name}")
-                Log.e("peter", "login${user.sessionToken}")
-                Log.e("peter", "login${user.timezone}")
                 SharedPreferencesTools.setUserEmail(requireContext(),user.name)
                 SharedPreferencesTools.setUserObjectId(requireContext(),user.objectId)
+                SharedPreferencesTools.setUserObjectId(requireContext(),user.sessionToken)
                 Navigation.findNavController(binding.loginBtn).navigate(R.id.action_loginFragment_to_carkParkInfoFragment)
-            }.takeIf { user.sessionToken.isNotEmpty() }.let {
-                SharedPreferencesTools.setUserSession(requireContext(),user.sessionToken)
             }
         }
     }
